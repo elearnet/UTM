@@ -53,13 +53,14 @@ jobs:
     strategy:
       matrix:
         arch: [arm64]
-        platform: [ios, ios_simulator, ios-tci, ios_simulator-tci, macos, visionos, visionos_simulator, visionos-tci, visionos_simulator-tci]
-        include:
-          # x86_64 supported only for macOS and simulators
-          - arch: x86_64
-            platform: macos
-          - arch: x86_64
-            platform: ios_simulator
+        #platform: [ios, ios_simulator, ios-tci, ios_simulator-tci, macos, visionos, visionos_simulator, visionos-tci, visionos_simulator-tci]
+        platform: [ios]
+        #include:
+          ## x86_64 supported only for macOS and simulators
+          #- arch: x86_64
+           # platform: macos
+          #- arch: x86_64
+            #platform: ios_simulator
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -91,7 +92,7 @@ jobs:
         run: |
           brew uninstall cmake
           brew install bison pkg-config gettext glib-utils libgpg-error nasm make meson
-          pip3 install six pyparsing --break-system-packages
+          pip3 install six pyparsing distutils --break-system-packages
           rm -f /usr/local/lib/pkgconfig/*.pc
       - name: Build Sysroot
         if: steps.cache-sysroot.outputs.cache-hit != 'true' || github.event.inputs.rebuild_sysroot == 'true'
