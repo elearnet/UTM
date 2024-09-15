@@ -87,9 +87,6 @@ jobs:
           brew install bison pkg-config gettext glib-utils libgpg-error nasm make meson
           rm -f /usr/local/lib/pkgconfig/*.pc
       - name: Install Python Requirements
-        with:
-          python-version: '3.11'
-          cache: 'pip3'
         if: (steps.cache-sysroot.outputs.cache-hit != 'true' || github.event.inputs.rebuild_sysroot == 'true') 
         run: |
           pip3 install --user six pyparsing
