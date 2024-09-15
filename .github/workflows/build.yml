@@ -89,6 +89,8 @@ jobs:
       - name: Install Python Requirements
         if: (steps.cache-sysroot.outputs.cache-hit != 'true' || github.event.inputs.rebuild_sysroot == 'true') 
         run: |
+          python3 -m venv ./venv
+          source ./venv/bin/activate
           python3 -m pip install six pyparsing
           rm -f /usr/local/lib/pkgconfig/*.pc
       - name: Build Sysroot
