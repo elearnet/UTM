@@ -89,9 +89,7 @@ jobs:
       - name: Install Python Requirements
         if: (steps.cache-sysroot.outputs.cache-hit != 'true' || github.event.inputs.rebuild_sysroot == 'true') 
         run: |
-          brew install pystring
-          brew install pyparsing
-          brew install six 
+          python3 -m pip install six pyparsing
           rm -f /usr/local/lib/pkgconfig/*.pc
       - name: Build Sysroot
         if: steps.cache-sysroot.outputs.cache-hit != 'true' || github.event.inputs.rebuild_sysroot == 'true'
