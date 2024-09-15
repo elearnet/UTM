@@ -87,13 +87,16 @@ jobs:
           brew install bison pkg-config gettext glib-utils libgpg-error nasm make meson
           rm -f /usr/local/lib/pkgconfig/*.pc
       - name: Install Python Requirements
+        with:
+          python-version: '3.11'
+          cache: 'pip'
         if: (steps.cache-sysroot.outputs.cache-hit != 'true' || github.event.inputs.rebuild_sysroot == 'true') 
         run: |
-          python3 -m venv ./venv
-          source ./venv/bin/activate
-          python3 -m pip install six pyparsing
+          pip install --user six pyparsing
           rm -f /usr/local/lib/pkgconfig/*.pc
       - name: Build Sysroot
+        with:
+          python-version: '3.11'
         if: steps.cache-sysroot.outputs.cache-hit != 'true' || github.event.inputs.rebuild_sysroot == 'true'
         run: ./scripts/build_dependencies.sh -p ${{ matrix.platform }} -a ${{ matrix.arch }}
         env:
