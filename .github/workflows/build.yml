@@ -92,7 +92,7 @@ jobs:
         run: |
           brew uninstall cmake
           brew install bison pkg-config gettext glib-utils libgpg-error nasm make meson
-          python3 -m pip install setuptools
+          python3 -m pip install setuptools --break-system-packages
           pip3 install six pyparsing  --break-system-packages
           rm -f /usr/local/lib/pkgconfig/*.pc
       - name: Build Sysroot
