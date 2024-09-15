@@ -89,8 +89,7 @@ jobs:
       - name: Install Python Requirements
         if: (steps.cache-sysroot.outputs.cache-hit != 'true' || github.event.inputs.rebuild_sysroot == 'true') 
         run: |
-          ls -al /usr/lib
-          pipx install six pyparsing
+          pip3 --break-system-packages --user install six pyparsing
           rm -f /usr/local/lib/pkgconfig/*.pc
       - name: Build Sysroot
         if: steps.cache-sysroot.outputs.cache-hit != 'true' || github.event.inputs.rebuild_sysroot == 'true'
